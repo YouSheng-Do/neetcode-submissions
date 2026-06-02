@@ -1,0 +1,14 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return Counter(s) == Counter(t)
+        
+        # diff = defaultdict(int)
+
+        # if len(s) != len(t):
+        #     return False
+
+        # for ch1, ch2 in zip(s, t):
+        #     diff[ch1] += 1
+        #     diff[ch2] -= 1
+        
+        # return not any(v != 0 for v in diff.values())
