@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        // binary search tree maintain the property 
+        // For every node, the values of all nodes in its left subtree is less than the node's value
+        // and the values of all nodes in its right subtree is greater than the node's value
+
+        // so what we want to find is a node that separater p an q to two subtree 
+        // or a node equal to one of them
+        
+        // dfs
+
+        if (p->val > q->val) return lowestCommonAncestor(root, q, p);
+
+        if (!root || root == p || root == q) return root;
+
+        if (p->val < root->val && root->val < q->val) return root;
+
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+
+        // if (left && right) return root;
+
+        return left ? left : right;
+    }
+};
